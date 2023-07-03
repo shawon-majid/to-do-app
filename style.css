@@ -1,0 +1,14 @@
+.box {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.header {
+    font-size: xx-large;
+    padding: 20px;
+}
+
+.list-of-task-div {
+    display: flex;
+    justify-content: center;
+}
