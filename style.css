@@ -12,3 +12,13 @@
     display: flex;
     justify-content: center;
 }
+
+.task-div {
+    display: flex;
+}
+
+.button {
+    margin-left: 12px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
