@@ -20,6 +20,14 @@ app.delete('/tasks/:id', (req, res) => {
     })
 })
 
+app.post('/tasks', (req, res) => {
+    const { taskId, taskName } = req.body;
+    addTask(taskId, taskName).then(() => {
+        console.log(res);
+        res.send('added successfully');
+    })
+})
+
 
 app.listen(9090, () => {
     console.log('The Server started listening on port: 9090...')

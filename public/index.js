@@ -9,8 +9,6 @@ var num = 0;
 
 addTaskHtml = (id, taskName) => {
 
-
-
     var task = document.createElement('li');
     var html = `
         <div class="task-div">
@@ -22,6 +20,8 @@ addTaskHtml = (id, taskName) => {
 
     task.innerHTML = html;
     taskList.appendChild(task)
+
+
 }
 
 
@@ -51,6 +51,25 @@ form.addEventListener('submit', e => {
 
 
     addTaskHtml(id, taskName);
+
+    // now add this to database
+
+    const data = {
+        taskId: `${id}`,
+        taskName: taskName,
+    }
+
+    fetch('/tasks', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }).then((val) => {
+        console.log('Added Successfully')
+    })
+
+
 })
 
 
