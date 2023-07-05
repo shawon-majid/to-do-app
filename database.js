@@ -57,6 +57,10 @@ const addTask = async (taskId, taskName) => {
 //     console.log(val);
 // })
 
+// addTask('sadme2340', 'this is my 1st Task').then((val) => {
+//     console.log(val);
+// })
+
 const deleteTask = async (taskId) => {
     let sql = `
         DELETE FROM tasks
@@ -86,4 +90,6 @@ const editTask = async (taskId, taskName) => {
 // })
 
 
+
+module.exports = { showTasks, addTask, editTask, deleteTask }
 
