@@ -95,9 +95,8 @@ clickDeleteButton = (button, id) => {
 
 clickEditButton = (id) => {
     console.log('Edit button clicked')
-    console.log(id)
 
+    window.location.href = `/edit/${id}`;
     // taskList.parent
-
 }
 

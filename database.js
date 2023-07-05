@@ -89,7 +89,20 @@ const editTask = async (taskId, taskName) => {
 //     console.log(val);
 // })
 
+const getTaskName = async (id) => {
+    let sql = `
+        SELECT taskName 
+        FROM tasks 
+        WHERE taskId = ?
+    `
+    return await pool.query(sql, id);
+}
+
+// getTaskName('radme2430').then((val) => {
+//     console.log(val[0][0]);
+// })
 
 
-module.exports = { showTasks, addTask, editTask, deleteTask }
+
+module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName }
 

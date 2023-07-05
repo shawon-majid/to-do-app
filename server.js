@@ -1,10 +1,16 @@
 
 const express = require('express');
-const { showTasks, addTask, editTask, deleteTask } = require('./database');
+const path = require('path');
+const { showTasks, addTask, editTask, deleteTask, getTaskName } = require('./database');
 const app = express();
 
 app.use(express.json());
 app.use(express.static('./public'));
+
+
+app.get('/edit/:id', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'editPage.html'));
+})
 
 app.get('/tasks', (req, res) => {
     showTasks().then((val) => {
@@ -14,9 +20,16 @@ app.get('/tasks', (req, res) => {
 })
 
 app.delete('/tasks/:id', (req, res) => {
-    deleteTask(req.params.id).then(() => {
-        console.log(res);
+    deleteTask(req.params.id).then((val) => {
+        console.log(val);
         res.send('deleted successfully');
+    })
+})
+
+app.get('/tasks/:id', (req, res) => {
+    getTaskName(req.params.id).then((val) => {
+
+        res.json(val[0][0]);
     })
 })
 
@@ -27,6 +40,17 @@ app.post('/tasks', (req, res) => {
         res.send('added successfully');
     })
 })
+
+app.put('/edit/:id', (req, res) => {
+
+    const { taskId, taskName } = req.body;
+
+    editTask(taskId, taskName).then(() => {
+        console.log('Edited');
+        res.send('Edit Success');
+    })
+})
+
 
 
 app.listen(9090, () => {
