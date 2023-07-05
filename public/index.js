@@ -4,7 +4,6 @@ const taskList = document.querySelector('.list-of-task');
 
 const form = document.forms['To-Do-Form'];
 
-var num = 0;
 
 
 addTaskHtml = (id, taskName) => {
@@ -46,8 +45,7 @@ form.addEventListener('submit', e => {
     var taskName = document.getElementById('task-name').value;
 
     // will generate some id
-    var id = num;
-    num++;
+    var id = generateRandomId(8);
 
 
     addTaskHtml(id, taskName);
@@ -100,3 +98,15 @@ clickEditButton = (id) => {
     // taskList.parent
 }
 
+
+
+function generateRandomId(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+    return result;
+}
