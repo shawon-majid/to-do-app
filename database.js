@@ -34,7 +34,8 @@ const pool = mysql.createPool({
 
 const showTasks = async () => {
     let sql = `
-        SELECT * FROM tasks;
+        SELECT * FROM tasks
+        ORDER BY timestamp_column ASC;
     `;
     return await pool.query(sql);
 }
