@@ -40,7 +40,7 @@ fetch(`/tasks/${taskIds}`).then((response) => {
                     console.log('Edited Successfully')
                 })
 
-                window.location.href = '/';
+                window.location.href = '/home';
 
 
             }

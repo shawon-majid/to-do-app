@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="loginStyle.css">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="regStyle.css">
 </head>
 
 <body>
     <div class="box">
         <form>
-            <div class="header">Welcome Back</div>
+            <div class="header">Create your account</div>
+            <div class="input-group">
+                <label for="username">Name:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
             <div class="input-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -20,15 +24,10 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="submit-button">Login</button>
-            <div>
-
-                <p>Don't have account? <a href="registrationPage.html">create right now!</a> </p>
-            </div>
+            <button type="submit" class="register-button">Register</button>
         </form>
     </div>
 
-    <script src="login.js"></script>
 </body>
 
 </html>

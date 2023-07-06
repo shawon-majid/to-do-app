@@ -1,12 +1,19 @@
 
 const express = require('express');
 const path = require('path');
+
+
+
 const { showTasks, addTask, editTask, deleteTask, getTaskName } = require('./database');
 const app = express();
 
 app.use(express.json());
 app.use(express.static('./public'));
 
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'home.html'))
+})
 
 app.get('/edit/:id', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'editPage.html'));
