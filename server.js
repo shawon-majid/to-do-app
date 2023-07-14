@@ -1,18 +1,36 @@
-
 const express = require('express');
 const path = require('path');
-
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 
 const { showTasks, addTask, editTask, deleteTask, getTaskName } = require('./database');
 const app = express();
 
+
+
+
 app.use(express.json());
 app.use(express.static('./public'));
+app.use(cookieParser());
 
 
 app.get('/home', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'home.html'))
+
+    console.log(req.cookies.token)
+
+    if (req.cookies && req.cookies['tokentodo']) {
+
+        // now authenticate this token
+        // if authentication true return the page, or again access denied
+        // will do it later
+
+        res.sendFile(path.resolve(__dirname, 'public', 'home.html'))
+    }
+    else {
+        res.status(403).send("Access Denied!!")
+    }
+
 })
 
 app.get('/edit/:id', (req, res) => {

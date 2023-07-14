@@ -44,29 +44,34 @@ form.addEventListener('submit', e => {
 
     var taskName = document.getElementById('task-name').value;
 
-    // will generate some id
-    var id = generateRandomId(8);
+    if (taskName) {
+
+        // will generate some id
+        var id = generateRandomId(8);
 
 
-    addTaskHtml(id, taskName);
+        addTaskHtml(id, taskName);
 
-    // now add this to database
+        // now add this to database
 
-    const data = {
-        taskId: `${id}`,
-        taskName: taskName,
+        const data = {
+            taskId: `${id}`,
+            taskName: taskName,
+        }
+
+        fetch('/tasks', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }).then((val) => {
+            console.log('Added Successfully')
+        })
+
+
+        document.getElementById('task-name').value = "";
     }
-
-    fetch('/tasks', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-    }).then((val) => {
-        console.log('Added Successfully')
-    })
-
 
 })
 
