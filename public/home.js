@@ -29,8 +29,6 @@ fetch('/tasks').then((response) => {
 
         data.forEach(element => {
 
-            console.log(element);
-
             console.log(element.taskId, element.taskName);
 
             addTaskHtml(element.taskId, element.taskName);

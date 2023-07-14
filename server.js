@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
 
-const { showTasks, addTask, editTask, deleteTask, getTaskName } = require('./database');
+const { showTasks, addTask, editTask, deleteTask, getTaskName, addUser } = require('./database');
 const app = express();
 
 
@@ -16,8 +16,6 @@ app.use(cookieParser());
 
 
 app.get('/home', (req, res) => {
-
-    console.log(req.cookies.token)
 
     if (req.cookies && req.cookies['tokentodo']) {
 
@@ -76,6 +74,27 @@ app.put('/edit/:id', (req, res) => {
     })
 })
 
+
+// reg and login related
+
+app.post('/reg', async (req, res) => {
+
+
+    const { username, email, password } = req.body;
+
+
+    try {
+        await addUser(username, email, password);
+
+        res.status(200).send('Successful Registration')
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("something went wrong " + err)
+    }
+
+
+
+})
 
 
 app.listen(9090, () => {

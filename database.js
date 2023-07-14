@@ -103,7 +103,16 @@ const getTaskName = async (id) => {
 //     console.log(val[0][0]);
 // })
 
+const addUser = async (username, email, hashedPassword) => {
+    let sql = `
+        INSERT INTO users
+        VALUES("${username}", "${email}", "${hashedPassword}")
+    `;
+
+    return await pool.query(sql);
+}
 
 
-module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName }
+
+module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName, addUser }
 
