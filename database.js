@@ -32,12 +32,13 @@ const pool = mysql.createPool({
 //     console.log(val);
 // })
 
-const showTasks = async () => {
+const showTasks = async (email) => {
     let sql = `
         SELECT * FROM tasks
+        WHERE email = ?
         ORDER BY timestamp_column ASC;
     `;
-    return await pool.query(sql);
+    return await pool.query(sql, [email]);
 }
 
 // showTasks().then((val) => {
@@ -45,13 +46,13 @@ const showTasks = async () => {
 //     console.log(row);
 // })
 
-const addTask = async (taskId, taskName) => {
+const addTask = async (taskId, taskName, email) => {
     let sql = `
-        INSERT INTO tasks(taskId, taskName)
-        VALUES (?, ?)
+        INSERT INTO tasks(taskId, taskName, email)
+        VALUES (?, ?, ?)
     `;
 
-    return await pool.query(sql, [taskId, taskName])
+    return await pool.query(sql, [taskId, taskName, email])
 }
 
 // addTask('radme2430', 'This is my 2nd Task').then((val) => {
@@ -124,5 +125,5 @@ const getUser = async (email) => {
 
 
 
-module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName, addUser }
+module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName, addUser, getUser }
 

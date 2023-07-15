@@ -22,3 +22,9 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+.logout-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}

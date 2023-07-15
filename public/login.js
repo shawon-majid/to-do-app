@@ -2,18 +2,27 @@
 
 const loginButton = document.querySelector('.submit-button');
 
-loginButton.addEventListener("click", (event) => {
+loginButton.addEventListener("click", async (event) => {
 
     event.preventDefault();
 
     const emailInput = document.getElementById('email').value;
     const passwordInput = document.getElementById('password').value;
 
-    if (emailInput == "shawon.majid@gmail.com" && passwordInput == "123") {
+    const params = new URLSearchParams();
+    params.append('email', emailInput);
+    params.append('password', passwordInput);
+
+    const response = await fetch(`/login?${params.toString()}`)
+
+    if (response.ok) {
+        // const user = await response.json()
         window.location.href = "/home";
     }
     else {
-        alert("Verification failed!");
+        alert("Verification failed! Try again");
     }
+
+
 
 })

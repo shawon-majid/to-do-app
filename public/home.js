@@ -4,6 +4,8 @@ const taskList = document.querySelector('.list-of-task');
 
 const form = document.forms['To-Do-Form'];
 
+const logoutButton = document.querySelector('.logout-button');
+
 
 
 addTaskHtml = (id, taskName) => {
@@ -103,6 +105,23 @@ clickEditButton = (id) => {
 
 
 
+logoutButton.addEventListener('click', async () => {
+    // Perform logout functionality here
+
+    const response = await fetch('/logout');
+
+    if (response.ok) {
+        window.location.href = '/';
+    }
+    else {
+        alert("logout request failed. Try again!");
+    }
+
+});
+
+
+
+
 function generateRandomId(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -113,3 +132,4 @@ function generateRandomId(length) {
     }
     return result;
 }
+
