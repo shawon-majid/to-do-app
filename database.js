@@ -113,6 +113,16 @@ const addUser = async (username, email, hashedPassword) => {
 }
 
 
+const getUser = async (email) => {
+    let sql = `
+        SELECT * FROM users
+        WHERE email = "${email}"
+    `;
+
+    return await pool.query(sql);
+}
+
+
 
 module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName, addUser }
 

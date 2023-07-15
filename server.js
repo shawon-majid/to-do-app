@@ -85,15 +85,11 @@ app.post('/reg', async (req, res) => {
 
     try {
         await addUser(username, email, password);
-
-        res.status(200).send('Successful Registration')
+        res.status(200).json({ message: 'Registration Successful' });
     } catch (err) {
         console.log(err);
-        res.status(500).send("something went wrong " + err)
+        res.status(500).json({ message: 'Something went wrong: ' + err });
     }
-
-
-
 })
 
 

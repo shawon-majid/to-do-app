@@ -1,8 +1,9 @@
+// const { response } = require("express");
 
 
 const regButton = document.querySelector('.register-button');
 
-regButton.addEventListener("click", (event) => {
+regButton.addEventListener("click", async (event) => {
 
     event.preventDefault();
 
@@ -23,27 +24,27 @@ regButton.addEventListener("click", (event) => {
             password: passwordInput,
         }
 
-        fetch('/reg', {
+        const response = await fetch('/reg', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data),
-        }).then((response) => {
-
-            if (response.ok) {
-                console.log("Registration Successful")
-                window.location.href = `/`
-            }
-            else {
-                alert("This email exists!");
-
-            }
-
-
-        }).catch(err => {
-            console.log(err);
         })
+
+
+        const jsonformat = await response.json();
+
+        console.log(jsonformat);
+
+        if (response.ok) {
+            document.body.innerHTML = `<h1 style="text-align: center;">Registration Success</h1>
+            <a href="/">
+              <button style="display: block; margin: 0 auto;">Login</button>
+            </a>`;
+        }
+
+
     }
     else {
         alert("Please Fill up the form properly");
@@ -52,3 +53,6 @@ regButton.addEventListener("click", (event) => {
 
 
 })
+
+
+
