@@ -36,6 +36,17 @@ const cookieJwtAuth = (req, res, next) => {
 
 // routes
 
+app.get('/', (req, res) => {
+
+    if (req.cookies && req.cookies['tokentodo']) {
+        res.sendFile(path.resolve(__dirname, 'public', 'home.html'))
+    }
+    else {
+        res.sendFile(path.resolve(__dirname, 'public', 'login.html'))
+    }
+
+})
+
 app.get('/home', cookieJwtAuth, (req, res) => {
 
     if (req.cookies && req.cookies['tokentodo']) {
