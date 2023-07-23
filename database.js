@@ -137,7 +137,7 @@ const getUser = async (email) => {
         return result;
     }
     catch (err) {
-        throw new Error("Error fetching user from the database");
+        throw new Error("Error fetching user from the database!");
     }
 
 
