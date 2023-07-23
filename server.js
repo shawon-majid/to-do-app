@@ -28,22 +28,15 @@ const cookieJwtAuth = (req, res, next) => {
         <a href="/">
           <button style="display: block; margin: 0 auto;">Login</button>
         </a>`);
-        // return res.redirect("/");
     }
-    // next();
 };
+
+
 
 
 app.get('/home', cookieJwtAuth, (req, res) => {
 
-
-
     if (req.cookies && req.cookies['tokentodo']) {
-
-        // now authenticate this token
-        // if authentication true return the page, or again access denied
-        // will do it later
-
         res.sendFile(path.resolve(__dirname, 'public', 'home.html'))
     }
     else {
@@ -58,45 +51,41 @@ app.get('/edit/:id', cookieJwtAuth, (req, res) => {
 
 app.get('/tasks', cookieJwtAuth, (req, res) => {
 
-    // here we will use req.user;
-
-
-
     showTasks(req.user.email).then((val) => {
         const [row] = val;
         res.json(row);
+    }).catch(err => {
+        res.status(500).json({ error: `Internal server error: ${err}` });
     })
 })
 
 app.delete('/tasks/:id', cookieJwtAuth, (req, res) => {
-    deleteTask(req.params.id).then((val) => {
-        console.log(val);
-        res.send('deleted successfully');
+
+    deleteTask(req.params.id).catch(err => {
+        res.status(500).json({ error: `Internal server error: ${err}` })
     })
 })
 
 app.get('/tasks/:id', cookieJwtAuth, (req, res) => {
     getTaskName(req.params.id).then((val) => {
-
         res.json(val[0][0]);
+    }).catch(err => {
+        res.status(500).json({ error: `Internal server error: ${err}` })
     })
 })
 
 app.post('/tasks', cookieJwtAuth, (req, res) => {
     const { taskId, taskName } = req.body;
     const email = req.user.email;
-    addTask(taskId, taskName, email).then(() => {
-        res.send('added successfully');
+    addTask(taskId, taskName, email).catch(err => {
+        res.status(500).json({ error: `Internal server error: ${err}` })
     })
 })
 
 app.put('/edit/:id', cookieJwtAuth, (req, res) => {
-
     const { taskId, taskName } = req.body;
-
-    editTask(taskId, taskName).then(() => {
-        console.log('Edited');
-        res.send('Edit Success');
+    editTask(taskId, taskName).catch(err => {
+        res.status(500).json({ error: `Internal server error: ${err}` })
     })
 })
 
@@ -124,21 +113,17 @@ app.get('/login/', async (req, res) => {
     try {
         const value = await getUser(email);
 
-
-
         const user = value[0][0];
 
         if (user && user.password == password) { // verified
 
-            // if verified user, generate a token and set it to cookies
-
+            // if verified user, generate a token and set it  to cookies
 
             const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: "1h" })
             res.cookie('tokentodo', token);
             res.user = user;
-            // console.log(user);
+
             return res.sendStatus(200).end();
-            // return res.json(user);
         }
         else {
             return res.sendStatus(500);

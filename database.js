@@ -7,7 +7,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
@@ -16,113 +15,133 @@ const pool = mysql.createPool({
 }).promise();
 
 
-// const createTaskTable = async () => {
-//     let sql = `
-//     CREATE TABLE tasks(
-//         taskId VARCHAR(200) PRIMARY KEY,
-//         taskName VARCHAR(200)
-//     );
-//     `
-
-//     return await pool.query(sql);
-// }
-
-
-// createTaskTable().then((val) => {
-//     console.log(val);
-// })
-
 const showTasks = async (email) => {
-    let sql = `
+
+    try {
+        let sql = `
         SELECT * FROM tasks
         WHERE email = ?
         ORDER BY timestamp_column ASC;
-    `;
-    return await pool.query(sql, [email]);
-}
+        `;
+        const result = await pool.query(sql, [email]);
+        return result;
+    } catch (err) {
+        throw new Error("Error fetching data from the database");
+    }
 
-// showTasks().then((val) => {
-//     const [row] = val;
-//     console.log(row);
-// })
+}
 
 const addTask = async (taskId, taskName, email) => {
-    let sql = `
-        INSERT INTO tasks(taskId, taskName, email)
-        VALUES (?, ?, ?)
-    `;
 
-    return await pool.query(sql, [taskId, taskName, email])
+    try {
+        let sql = `
+            INSERT INTO tasks(taskId, taskName, email)
+            VALUES (?, ?, ?)
+        `;
+
+        const result = await pool.query(sql, [taskId, taskName, email]);
+        return result;
+    } catch (err) {
+        throw new Error("Error adding task in the database");
+    }
+
+
 }
 
-// addTask('radme2430', 'This is my 2nd Task').then((val) => {
-//     console.log(val);
-// })
-
-// addTask('sadme2340', 'this is my 1st Task').then((val) => {
-//     console.log(val);
-// })
 
 const deleteTask = async (taskId) => {
-    let sql = `
+
+    try {
+        let sql = `
         DELETE FROM tasks
         WHERE taskId = ?
-    `;
+        `;
 
-    return await pool.query(sql, taskId);
+        const result = await pool.query(sql, taskId);
+        return result;
+    }
+    catch (err) {
+        throw new Error("Couldn't Delete data from the Database!");
+    }
+
+
+
 }
-
-
-// deleteTask('radme2430').then((val) => {
-//     console.log(val);
-// })
 
 const editTask = async (taskId, taskName) => {
-    let sql = `
-        UPDATE tasks
-        SET taskName = ?
-        WHERE taskId = ?
-    `;
 
-    return await pool.query(sql, [taskName, taskId]);
+    try {
+        let sql = `
+            UPDATE tasks
+            SET taskName = ?
+            WHERE taskId = ?
+        `;
+
+        const result = await pool.query(sql, [taskName, taskId]);
+        return result;
+    }
+    catch (err) {
+        throw new Error("Failed to connect to the database!");
+    }
+
 }
 
-// editTask('radme2430', 'This is my edited 2nd task').then((val) => {
-//     console.log(val);
-// })
 
 const getTaskName = async (id) => {
-    let sql = `
-        SELECT taskName 
-        FROM tasks 
-        WHERE taskId = ?
-    `
-    return await pool.query(sql, id);
+
+    try {
+        let sql = `
+            SELECT taskName 
+            FROM tasks 
+            WHERE taskId = ?
+        `;
+
+        const result = await pool.query(sql, id);
+        return result;
+    }
+    catch (err) {
+        throw new Error("Couldn't fetch data from the database");
+    }
+
+
 }
 
-// getTaskName('radme2430').then((val) => {
-//     console.log(val[0][0]);
-// })
-
 const addUser = async (username, email, hashedPassword) => {
-    let sql = `
-        INSERT INTO users
-        VALUES("${username}", "${email}", "${hashedPassword}")
-    `;
 
-    return await pool.query(sql);
+    try {
+        let sql = `
+            INSERT INTO users
+            VALUES("${username}", "${email}", "${hashedPassword}")
+        `;
+
+        const result = await pool.query(sql);
+        return result;
+    }
+    catch (err) {
+        throw new Error("Error Adding user in the database");
+    }
+
+
 }
 
 
 const getUser = async (email) => {
-    let sql = `
-        SELECT * FROM users
-        WHERE email = "${email}"
-    `;
 
-    return await pool.query(sql);
+    try {
+        let sql = `
+            SELECT * FROM users
+            WHERE email = "${email}"
+        `;
+
+        const result = await pool.query(sql);
+        return result;
+    }
+    catch (err) {
+        throw new Error("Error fetching user from the database");
+    }
+
+
 }
-
 
 
 module.exports = { showTasks, addTask, editTask, deleteTask, getTaskName, addUser, getUser }

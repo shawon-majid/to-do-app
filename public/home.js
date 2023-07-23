@@ -25,12 +25,19 @@ addTaskHtml = (id, taskName) => {
 // get all tasks
 
 fetch('/tasks').then((response) => {
-    response.json().then((data) => {
-        data.forEach(element => {
-            console.log(element.taskId, element.taskName);
-            addTaskHtml(element.taskId, element.taskName);
-        });
-    })
+
+    if (response.ok) {
+        response.json().then((data) => {
+            data.forEach(element => {
+                console.log(element.taskId, element.taskName);
+                addTaskHtml(element.taskId, element.taskName);
+            });
+        })
+    }
+    else {
+        alert(response);
+    }
+
 })
 
 

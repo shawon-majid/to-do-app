@@ -23,6 +23,4 @@ loginButton.addEventListener("click", async (event) => {
         alert("Verification failed! Try again");
     }
 
-
-
 })

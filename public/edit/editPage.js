@@ -18,7 +18,6 @@ fetch(`/tasks/${taskIds}`).then((response) => {
         // console.log(data.taskName)
         taskNameElement.appendChild(document.createTextNode(data.taskName))
 
-
         form.addEventListener('submit', e => {
             e.preventDefault(); // prevents from restarting
 
@@ -36,17 +35,10 @@ fetch(`/tasks/${taskIds}`).then((response) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data),
-                }).then((val) => {
-                    console.log('Edited Successfully')
                 })
-
                 window.location.href = '/home';
-
-
             }
-
         })
-
     })
 })
 
