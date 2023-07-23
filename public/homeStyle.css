@@ -25,12 +25,38 @@ body {
 }
 
 .list-of-task-div {
+
     display: flex;
     justify-content: center;
 }
 
 .task-div {
+    margin-bottom: 15px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-wrapper {
+    width: 70%;
+    border: 1px solid #DFD7BF;
+    background-color: #F2EAD3;
+    border-radius: 4px;
+
+}
+
+.name-of-task {
+    margin: 10px 10px;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 25px;
+}
+
+.button-wrapper {
+    width: 30%;
+    display: flex;
+    gap: 5px;
 }
 
 .button {
@@ -104,5 +130,7 @@ input[type="text"] {
 }
 
 .list-of-task {
+    min-width: 30%;
+    max-width: 60%;
     list-style-type: decimal;
 }

@@ -10,9 +10,15 @@ addTaskHtml = (id, taskName) => {
     var task = document.createElement('li');
     var html = `
         <div class="task-div">
-            <p class="name-of-task">${taskName}</p>
-            <button class="button delete" onclick="clickDeleteButton(this, '${id}')">Delete</button>
-            <button class="button edit" onclick="clickEditButton('${id}')">Edit</button>
+       
+               <div class="name-wrapper">
+                  <p class="name-of-task">${taskName}</p>
+               </div>
+      
+                <div class="button-wrapper">
+                    <button class="button delete" onclick="clickDeleteButton(this, '${id}')">Delete</button>
+                    <button class="button edit" onclick="clickEditButton('${id}')">Edit</button>
+                <div>
         </div>
     `
 
@@ -83,7 +89,7 @@ logoutButton.addEventListener('click', async () => {
 // buttons
 
 clickDeleteButton = (button, id) => {
-    const liElement = button.parentElement.parentElement; // button's parent = div, div's parent = li
+    const liElement = button.parentElement.parentElement.parentElement; // button's parent = div, div's parent = div, div's parent = li
     taskList.removeChild(liElement);
     removeTask(id);
 }
