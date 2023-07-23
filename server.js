@@ -34,6 +34,8 @@ const cookieJwtAuth = (req, res, next) => {
 
 
 
+// routes
+
 app.get('/home', cookieJwtAuth, (req, res) => {
 
     if (req.cookies && req.cookies['tokentodo']) {
@@ -88,6 +90,9 @@ app.put('/edit/:id', cookieJwtAuth, (req, res) => {
         res.status(500).json({ error: `Internal server error: ${err}` })
     })
 })
+
+
+
 
 
 // reg and login related

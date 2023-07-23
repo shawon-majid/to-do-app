@@ -29,7 +29,6 @@ fetch('/tasks').then((response) => {
     if (response.ok) {
         response.json().then((data) => {
             data.forEach(element => {
-                console.log(element.taskId, element.taskName);
                 addTaskHtml(element.taskId, element.taskName);
             });
         })
@@ -37,8 +36,10 @@ fetch('/tasks').then((response) => {
     else {
         alert(response);
     }
-
 })
+
+
+
 
 
 // submit button
@@ -97,21 +98,29 @@ clickEditButton = (id) => {
 
 // api calls
 
-addTask = (data) => {
-    fetch('/tasks', {
+addTask = async (data) => {
+    const response = await fetch('/tasks', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data),
     })
+
+    if (!response.ok) {
+        alert(response.json());
+    }
 }
 
 
-removeTask = (id) => {
-    fetch(`/tasks/${id}`, {
+removeTask = async (id) => {
+    const response = await fetch(`/tasks/${id}`, {
         method: 'DELETE',
     })
+
+    if (!response.ok) {
+        alert(response.json());
+    }
 }
 
 
