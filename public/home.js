@@ -3,8 +3,7 @@
 const taskList = document.querySelector('.list-of-task');
 const form = document.forms['To-Do-Form'];
 const logoutButton = document.querySelector('.logout-button');
-
-
+const userName = document.querySelector('.user-name');
 
 addTaskHtml = (id, taskName) => {
 
@@ -27,8 +26,10 @@ addTaskHtml = (id, taskName) => {
 fetch('/tasks').then((response) => {
 
     if (response.ok) {
+
         response.json().then((data) => {
-            data.forEach(element => {
+            userName.innerHTML = `User: ${data.username}`;
+            (data.tasks).forEach(element => {
                 addTaskHtml(element.taskId, element.taskName);
             });
         })
@@ -135,4 +136,3 @@ generateRandomId = (length) => {
     }
     return result;
 }
-

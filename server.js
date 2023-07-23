@@ -64,9 +64,18 @@ app.get('/edit/:id', cookieJwtAuth, (req, res) => {
 
 app.get('/tasks', cookieJwtAuth, (req, res) => {
 
+
     showTasks(req.user.email).then((val) => {
+
+
         const [row] = val;
-        res.json(row);
+
+        const responseObj = {
+            tasks: row,
+            username: req.user.username,
+        }
+
+        res.json(responseObj);
     }).catch(err => {
         res.status(500).json({ error: `Internal server error: ${err}` });
     })

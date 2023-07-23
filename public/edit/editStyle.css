@@ -1,3 +1,15 @@
+.background-image-container {
+    background-image: url('../pictures/bg1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+}
+
+.task-name {
+    font-size: x-large;
+}
+
 .box {
     padding-top: 10%;
     text-align: center;
@@ -17,8 +29,14 @@
     display: flex;
 }
 
-.button {
+.submit-button {
     margin-left: 12px;
     margin-top: auto;
     margin-bottom: auto;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1.5px solid #000000;
+    border-radius: 4px;
+    cursor: pointer;
 }

@@ -1,3 +1,11 @@
+.background-image-container {
+    background-image: url('pictures/bg1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+}
+
 .box {
     padding-top: 10%;
     text-align: center;
@@ -25,7 +33,12 @@
 
 
 
-
-*/ .submit-button {
+.submit-button {
     margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1.5px solid #000000;
+    border-radius: 4px;
+    cursor: pointer;
 }
